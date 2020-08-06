@@ -12,18 +12,16 @@ function Signup() {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        // Axios
-        //     .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
-        //     .then((res) => {
-        //         console.log(res.data)
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     });
-        Axios.get(`http://localhost:5000/api/users/`).then(res => {
-            console.log(res)
-        })
-        if (username && password) {}
+        if (username && password) {
+            Axios
+                .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+        }
     }
 
     return (
