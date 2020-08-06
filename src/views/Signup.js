@@ -15,20 +15,25 @@ function Signup() {
                 <source src={videos} type="video/mp4"/>
             </video>
             <div className="Signup__FormContainer">
-                <p>Signup</p>
+                <p className="Signup__FormHeader">Signup</p>
                 <form className="Signup__Form">
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        className="Signup__Input"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}/>
-                    <label>Password</label>
-                    <input
-                        type="text"
-                        className="Signup__Input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}/>
+                    <div className="Signup__InputContainer">
+                        <label className="Signup__Label">Username</label>
+                        <input
+                            type="text"
+                            className="Signup__Input"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}/>
+                    </div>
+                    <div className="Signup__InputContainer">
+                        <label className="Signup__Label">Password</label>
+                        <input
+                            type="text"
+                            className="Signup__Input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}/>
+                    </div>
+                    <button className="Signup__Button">Signup</button>
                 </form>
             </div>
         </div>
