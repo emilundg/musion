@@ -1,0 +1,24 @@
+.Dashboard {}
+
+.Dashboard__SearchInputContainer {
+    position: relative;
+    display: flex;
+    border: 2px solid rgba(0,0,0, 0.55);
+    width: 34rem;
+    border-radius: 21px;
+}
+
+.Dashboard__SearchInput {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+}
+
+.Dashboard__SearchButton {}
+
+.Dashboard__Badge {
+    height: 1rem;
+    padding: 0.25rem;
+    border-radius: 13px;
+    width: 3rem;
+}

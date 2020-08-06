@@ -4,6 +4,7 @@ import './App.css';
 import Main from './views/Main';
 import Login from './views/Login';
 import Signup from './views/Signup';
+import Dashboard from './views/Dashboard';
 
 function App() {
     const [loggedIn,
@@ -37,7 +38,7 @@ function App() {
                 </ul>
 
                 <div className="App__Logo">
-                    Musion
+                   MUSION 
                 </div>
 
                 <Switch>
@@ -48,6 +49,9 @@ function App() {
                     </Route>
                     <Route path="/signup">
                         <Signup/>
+                    </Route>
+                    <Route path="/dashboard">
+                        <Dashboard/>
                     </Route>
                     <Route exact path="/">
                         {loggedIn
