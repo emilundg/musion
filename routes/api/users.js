@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
     res.send('register');
 });
 
-router.get('/signup', (req, res) => {
+router.post('/signup', (req, res) => {
     const {users} = req.app.locals;
     const {username, password} = req.query;
     users

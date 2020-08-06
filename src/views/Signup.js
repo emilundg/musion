@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/Signup.css';
 import videos from '../assets/coverr-someone-is-connecting-cables-5103.mp4';
+import Axios from "axios";
 
 function Signup() {
     // Declare a new state variable, which we'll call "count"
@@ -9,6 +10,22 @@ function Signup() {
     const [password,
         setPassword] = useState("");
 
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        // Axios
+        //     .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
+        //     .then((res) => {
+        //         console.log(res.data)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     });
+        Axios.get(`http://localhost:5000/api/users/`).then(res => {
+            console.log(res)
+        })
+        if (username && password) {}
+    }
+
     return (
         <div className="Signup">
             <video className="Signup__Video" loop autoPlay>
@@ -16,7 +33,7 @@ function Signup() {
             </video>
             <div className="Signup__FormContainer">
                 <p className="Signup__FormHeader">Signup</p>
-                <form className="Signup__Form">
+                <form className="Signup__Form" onSubmit={handleSubmit}>
                     <div className="Signup__InputContainer">
                         <label className="Signup__Label">Username</label>
                         <input
@@ -33,7 +50,7 @@ function Signup() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}/>
                     </div>
-                    <button className="Signup__Button">Signup</button>
+                    <input type="submit" className="Signup__Button" value="Signup"></input>
                 </form>
             </div>
         </div>
