@@ -3,7 +3,7 @@ import '../styles/Login.css';
 import videos from '../assets/coverr-someone-is-connecting-cables-5103.mp4';
 import Axios from "axios";
 
-function Login() {
+const Login = ({parentCallback}) => {
     // Declare a new state variable, which we'll call "count"
     const [username,
         setUsername] = useState("");
@@ -16,7 +16,7 @@ function Login() {
             Axios
                 .post(`http://localhost:5000/api/users/Login?username=${username}&password=${password}`)
                 .then((res) => {
-                    console.log(res)
+                    parentCallback(res.status);
                 })
                 .catch((error) => {
                     console.log(error)
