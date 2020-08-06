@@ -11,8 +11,10 @@ function Dashboard() {
     const AddQuery = () => {
         if (searchParam) {
             setSearchQuery([
-                ...searchQueries,
-                searchParam
+                ...searchQueries, {
+                    searchParam,
+                    bgColor: getRandomColor()
+                }
             ]);
             setSearchParam("");
         }
@@ -23,7 +25,7 @@ function Dashboard() {
         setSearchQuery(searchQueries.filter((e) => (e !== query)))
     };
 
-    const RenderTags = () => {
+    const getRandomColor = () => {
         const colors = [
             '#ffadad',
             '#ffd6a5',
@@ -33,15 +35,19 @@ function Dashboard() {
             '#bdb2ff',
             '#ffc6ff'
         ];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    const RenderTags = () => {
         return searchQueries.map((element, index) => {
             return (
                 <div
                     key={index}
                     className="Dashboard__Badge"
                     style={{
-                    backgroundColor: colors[Math.floor(Math.random() * colors.length)]
+                    backgroundColor: element.bgColor
                 }}>
-                    {element}
+                    {element.searchParam}
                 </div>
             )
         })
