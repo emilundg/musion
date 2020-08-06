@@ -43,7 +43,7 @@ function Signup() {
                     <div className="Signup__InputContainer">
                         <label className="Signup__Label">Password</label>
                         <input
-                            type="text"
+                            type="password"
                             className="Signup__Input"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}/>

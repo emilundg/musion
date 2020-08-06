@@ -1,0 +1,71 @@
+.Login {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 48rem;
+}
+
+.Login__Video {
+    position: absolute;
+    height: 48rem;
+    object-fit: cover;
+    width: 100vw;
+    z-index: -1;
+}
+
+.Login__FormContainer {
+    height: 21rem;
+    padding: 5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    align-self: center;
+    width: 21rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Login__Form {
+    display: grid;
+    grid-template-columns: 1;
+    grid-row-gap: 1rem;
+}
+
+.Login__FormHeader {
+    font-size: 1.25rem;
+}
+
+.Login__Input {
+    padding: 0 0.5rem;
+    width: 13rem;
+    height: 2rem;
+    font-size: 1rem;
+    border: 1px solid rgba(0,0,0, 0.55);
+    border-radius: 21px;
+}
+
+.Login__Label {
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+.Login__Input:focus {
+    outline: 0;
+}
+
+.Login__InputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login__Button {
+    border: none;
+    font-size: 1rem;
+    background-color: #1d3557;
+    margin-top: 2rem;
+    border-radius: 21px;
+    height: 2rem;
+    color: white;
+    text-transform: uppercase;
+}

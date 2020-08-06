@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
                     users
                         .insertOne({
                             username,
-                            hash
+                            password: hash 
                         }, function (err) {
                             if (err) 
                                 throw err;
@@ -33,11 +33,24 @@ router.post('/signup', (req, res) => {
         })
 })
 
-// create a GET route
-router.get('/users', async(req, res) => {
-    // usersCollection     .find()     .toArray()     .then(results => {
-    // res.send(results);     })     .catch(error => console.error(error));
-    res.send('users')
+router.post('/login', (req, res) => {
+    const {users} = req.app.locals;
+    const {username, password} = req.query;
+    users
+        .findOne({username})
+        .then(user => {
+            if (!user) 
+                return res.status(400).json({msg: 'User already exist'});
+            bcrypt
+                .compare(password, user.password)
+                .then(isMatch => {
+                    if (!isMatch) 
+                        return res.status(400).json({msg: 'Invalid credentials'});
+                    res
+                        .status(202)
+                        .json({msg: 'Successful login'});
+                })
+        })
 });
 
 module.exports = router;
