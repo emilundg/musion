@@ -9,7 +9,7 @@ function App() {
     return (
         <Router>
             <div>
-                <ul>
+                <ul className="App__Navbar">
                     <li>
                         <Link to="/">Home</Link>
                     </li>
@@ -20,6 +20,10 @@ function App() {
                         <Link to="/signup">Signup</Link>
                     </li>
                 </ul>
+
+                <div className="App__Logo">
+                    Musion
+                </div>
 
                 <Switch>
                     <Route path="/login">

@@ -1,0 +1,33 @@
+.Signup {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 48rem;
+}
+
+.Signup__Video {
+    position: absolute;
+    height: 48rem;
+    object-fit: cover;
+    width: 100vw;
+    z-index: -1;
+}
+
+.Signup__FormContainer {
+    height: 34rem;
+    align-self: center;
+    width: 21rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.Signup__Form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Signup__Input {
+    width: 13rem;
+    border-radius: 0.51rem;
+}
