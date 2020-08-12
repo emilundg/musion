@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/ResultList.css';
+import {FaPlay, FaClock} from 'react-icons/fa';
 
 const ResultList = ({data}) => {
     const listItems = (searchKeyArray) => {
@@ -11,6 +12,15 @@ const ResultList = ({data}) => {
                     </td>
                     <td>
                         <a href={song.url} target="_blank" rel="noopener noreferrer">{song.name}</a>
+                        <div>by {song.user.username}</div>
+                        <div>
+                            <div>
+                                <FaPlay/> {song.play_count}
+                            </div>
+                            <div>
+                                <FaClock/> {song.audio_length}
+                            </div>
+                        </div>
                     </td>
                 </tr>
             )
@@ -25,7 +35,6 @@ const ResultList = ({data}) => {
             {console.log(data)}
             <tbody>
                 {data.map(searchKey => {
-                    // console.log(searchKey)
                     return (listItems(searchKey.data))
                 })}
             </tbody>
