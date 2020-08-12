@@ -15,7 +15,8 @@ const Player = forwardRef(({
             }
         }
         changePlayerState();
-    }, [playbackURL, playerOpen]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [playbackURL]);
     if (playbackURL) {
         return (
             <div className="Player">
@@ -25,7 +26,7 @@ const Player = forwardRef(({
                         : <FaChevronDown onClick={() => setPlayerOpen(true)}/>}
                 </div>
                 <iframe
-                    className={!playerOpen && 'Player__Iframe--Closed'}
+                    className={!playerOpen ? 'Player__Iframe--Closed' : undefined}
                     title="Song playback"
                     width="100%"
                     height="89%"
