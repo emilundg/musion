@@ -12,7 +12,8 @@ function Dashboard() {
     const [songData,
         setSongData] = useState([]);
 
-    const AddQuery = async() => {
+    const AddQuery = async(e) => {
+        e.preventDefault();
         if (searchParam) {
             setSearchQuery([
                 ...searchQueries, {
@@ -83,7 +84,7 @@ function Dashboard() {
                         className="Dashboard__SearchInput"
                         value={searchParam}
                         onChange={(e) => setSearchParam(e.target.value)}/>
-                    <button onClick={AddQuery} className="Dashboard__SearchButton">Add</button>
+                    <button onClick={(e) => AddQuery(e)} className="Dashboard__SearchButton">Add</button>
                 </div>
                 <div className="Dashboard__TagsContainer">
                     {RenderTags()}
