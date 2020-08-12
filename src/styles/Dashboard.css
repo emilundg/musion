@@ -1,4 +1,11 @@
-.Dashboard {}
+.Dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: column;
+}
 
 .Dashboard__SearchInputContainer {
     position: relative;
@@ -34,7 +41,6 @@
     height: 1rem;
     padding: 0.25rem;
     border-radius: 13px;
-    max-width: 5rem;
 }
 .Dashboard__TagsContainer {
     display: flex;
@@ -48,4 +54,8 @@
     border: none;
     font-size: 1rem;
     align-items: center;
+}
+.Dashboard__Search {
+    display: grid;
+    grid-row-gap: 0.875rem;
 }

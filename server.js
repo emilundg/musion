@@ -22,6 +22,7 @@ app.use(express.json());
 
 app.use(cors());
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/search', require('./routes/api/search'));
 
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));

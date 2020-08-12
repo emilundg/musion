@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import '../styles/Dashboard.css';
 import {FaTimes} from 'react-icons/fa';
+import Axios from "axios";
+import ResultList from '../components/ResultList';
 
 function Dashboard() {
-    // Declare a new state variable, which we'll call "count"
     const [searchQueries,
         setSearchQuery] = useState([]);
     const [searchParam,
         setSearchParam] = useState("");
+    const [songData,
+        setSongData] = useState([]);
 
-    const AddQuery = () => {
+    const AddQuery = async() => {
         if (searchParam) {
             setSearchQuery([
                 ...searchQueries, {
@@ -18,14 +21,30 @@ function Dashboard() {
                     bgColor: GetRandomColor()
                 }
             ]);
+            await GetSongs(searchParam);
             setSearchParam("");
         }
     };
-
-    const RemoveQuery = (id) => {
-        setSearchQuery(searchQueries.filter((e) => (e.id !== id)))
+    const GetSongs = async(searchParam) => {
+        Axios
+            .get(`http://localhost:5000/api/search/?query=${searchParam}`)
+            .then((response) => {
+                const {data} = response.data;
+                setSongData([
+                    ...songData, {
+                        searchParam,
+                        data
+                    }
+                ]);
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+    const RemoveQuery = (query) => {
+        setSearchQuery(searchQueries.filter((e) => (e.id !== query.id)))
+        console.log(songData)
     };
-
     const GetRandomColor = () => {
         const colors = [
             '#ffadad',
@@ -38,7 +57,6 @@ function Dashboard() {
         ];
         return colors[Math.floor(Math.random() * colors.length)];
     }
-
     const RenderTags = () => {
         return searchQueries.map((element, index) => {
             return (
@@ -49,29 +67,29 @@ function Dashboard() {
                     backgroundColor: element.bgColor
                 }}>
                     {element.searchParam}
-                    <button
-                        onClick={() => RemoveQuery(element.id)}
-                        className="Dashboard__CloseButton">
+                    <button onClick={() => RemoveQuery(element)} className="Dashboard__CloseButton">
                         <FaTimes/>
                     </button>
                 </div>
             )
         })
     }
-
     return (
         <div className="Dashboard">
-            <div className="Dashboard__SearchInputContainer">
-                <input
-                    type="text"
-                    className="Dashboard__SearchInput"
-                    value={searchParam}
-                    onChange={(e) => setSearchParam(e.target.value)}/>
-                <button onClick={AddQuery} className="Dashboard__SearchButton">Add</button>
+            <div className="Dashboard__Search">
+                <div className="Dashboard__SearchInputContainer">
+                    <input
+                        type="text"
+                        className="Dashboard__SearchInput"
+                        value={searchParam}
+                        onChange={(e) => setSearchParam(e.target.value)}/>
+                    <button onClick={AddQuery} className="Dashboard__SearchButton">Add</button>
+                </div>
+                <div className="Dashboard__TagsContainer">
+                    {RenderTags()}
+                </div>
             </div>
-            <div className="Dashboard__TagsContainer">
-                {RenderTags()}
-            </div>
+            <ResultList data={songData}/>
         </div>
     );
 }
