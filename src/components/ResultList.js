@@ -10,14 +10,16 @@ const ResultList = ({data}) => {
                     <td>
                         <img src={song.pictures.medium} alt="Song description"/>
                     </td>
-                    <td>
-                        <a href={song.url} target="_blank" rel="noopener noreferrer">{song.name}</a>
-                        <div>by {song.user.username}</div>
+                    <td className="ResultList__InformationData">
                         <div>
-                            <div>
+                            <div className="ResultList__Username">{song.user.username}</div>
+                            <a href={song.url} target="_blank" rel="noopener noreferrer">{song.name}</a>
+                        </div>
+                        <div className="ResultList__AltInformation">
+                            <div className="ResultList__AltText">
                                 <FaPlay/> {song.play_count}
                             </div>
-                            <div>
+                            <div className="ResultList__AltText">
                                 <FaClock/> {song.audio_length}
                             </div>
                         </div>
@@ -30,7 +32,7 @@ const ResultList = ({data}) => {
         <table className="ResultList">
             <tr>
                 <th></th>
-                <th>Firstname</th>
+                <th></th>
             </tr>
             {console.log(data)}
             <tbody>
