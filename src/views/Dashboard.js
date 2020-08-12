@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/Dashboard.css';
+import {FaTimes} from 'react-icons/fa';
 
 function Dashboard() {
     // Declare a new state variable, which we'll call "count"
@@ -12,20 +13,20 @@ function Dashboard() {
         if (searchParam) {
             setSearchQuery([
                 ...searchQueries, {
+                    id: searchQueries.length,
                     searchParam,
-                    bgColor: getRandomColor()
+                    bgColor: GetRandomColor()
                 }
             ]);
             setSearchParam("");
         }
     };
 
-    const RemoveQuery = (e) => {
-        let query = e.target.value;
-        setSearchQuery(searchQueries.filter((e) => (e !== query)))
+    const RemoveQuery = (id) => {
+        setSearchQuery(searchQueries.filter((e) => (e.id !== id)))
     };
 
-    const getRandomColor = () => {
+    const GetRandomColor = () => {
         const colors = [
             '#ffadad',
             '#ffd6a5',
@@ -48,6 +49,11 @@ function Dashboard() {
                     backgroundColor: element.bgColor
                 }}>
                     {element.searchParam}
+                    <button
+                        onClick={() => RemoveQuery(element.id)}
+                        className="Dashboard__CloseButton">
+                        <FaTimes/>
+                    </button>
                 </div>
             )
         })
@@ -63,7 +69,9 @@ function Dashboard() {
                     onChange={(e) => setSearchParam(e.target.value)}/>
                 <button onClick={AddQuery} className="Dashboard__SearchButton">Add</button>
             </div>
-            {RenderTags()}
+            <div className="Dashboard__TagsContainer">
+                {RenderTags()}
+            </div>
         </div>
     );
 }

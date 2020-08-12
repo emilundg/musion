@@ -5,20 +5,47 @@
     display: flex;
     border: 2px solid rgba(0,0,0, 0.55);
     width: 34rem;
+    height: 2rem;
     border-radius: 21px;
 }
 
 .Dashboard__SearchInput {
     background-color: transparent;
     width: 100%;
+    padding: 1rem;
+    font-size: 1.125rem;
     border: none;
 }
-
-.Dashboard__SearchButton {}
-
+.Dashboard__SearchInput:focus {
+    outline: none;
+}
+.Dashboard__SearchButton {
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 .Dashboard__Badge {
+    display: flex;
+    margin: 0 0.375rem;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid rgba(0,0,0, 0.55);
     height: 1rem;
     padding: 0.25rem;
     border-radius: 13px;
-    width: 3rem;
+    max-width: 5rem;
+}
+.Dashboard__TagsContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.Dashboard__CloseButton {
+    display: flex;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    align-items: center;
 }

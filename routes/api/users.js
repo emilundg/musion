@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
                     users
                         .insertOne({
                             username,
-                            password: hash 
+                            password: hash
                         }, function (err) {
                             if (err) 
                                 throw err;
