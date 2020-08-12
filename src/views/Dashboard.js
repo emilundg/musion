@@ -38,12 +38,12 @@ function Dashboard() {
                 ]);
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             });
     }
     const RemoveQuery = (query) => {
-        setSearchQuery(searchQueries.filter((e) => (e.id !== query.id)))
-        console.log(songData)
+        setSearchQuery(searchQueries.filter((e) => (e.id !== query.id)));
+        setSongData(songData.filter((e) => (e.searchParam !== query.searchParam)));
     };
     const GetRandomColor = () => {
         const colors = [
