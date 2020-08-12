@@ -1,20 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import '../styles/Dashboard.css';
 import {FaTimes} from 'react-icons/fa';
 import Axios from "axios";
 import ResultList from '../components/ResultList';
+import Player from '../components/Player';
 
 function Dashboard() {
+    const resultRef = useRef();
+
     const [searchQueries,
         setSearchQuery] = useState([]);
     const [searchParam,
         setSearchParam] = useState("");
+    const [playbackURL,
+        setPlaybackURL] = useState("");
     const [songData,
         setSongData] = useState([]);
-
     const AddQuery = async(e) => {
         e.preventDefault();
         if (searchParam) {
+            resultRef
+                .current
+                .setLoading();
             setSearchQuery([
                 ...searchQueries, {
                     id: searchQueries.length,
@@ -43,6 +50,9 @@ function Dashboard() {
             });
     }
     const RemoveQuery = (query) => {
+        resultRef
+            .current
+            .setLoading();
         setSearchQuery(searchQueries.filter((e) => (e.id !== query.id)));
         setSongData(songData.filter((e) => (e.searchParam !== query.searchParam)));
     };
@@ -75,6 +85,9 @@ function Dashboard() {
             )
         })
     }
+    const onEventEmit = (playbackURL) => {
+        setPlaybackURL(playbackURL);
+    }
     return (
         <div className="Dashboard">
             <div className="Dashboard__Search">
@@ -83,6 +96,7 @@ function Dashboard() {
                         type="text"
                         className="Dashboard__SearchInput"
                         value={searchParam}
+                        placeholder="Search"
                         onChange={(e) => setSearchParam(e.target.value)}/>
                     <button onClick={(e) => AddQuery(e)} className="Dashboard__SearchButton">Add</button>
                 </div>
@@ -90,7 +104,8 @@ function Dashboard() {
                     {RenderTags()}
                 </div>
             </div>
-            <ResultList data={songData}/>
+            <ResultList data={songData} ref={resultRef} emitPlaybackURL={onEventEmit}/>
+            <Player playbackURL={playbackURL}/>
         </div>
     );
 }

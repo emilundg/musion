@@ -1,0 +1,31 @@
+.Player {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 34rem;
+    height: auto;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: white;
+    animation: fadeIn 0.4s ease-in;
+    padding-bottom: 1rem;
+}
+.Player__Accordion {
+    align-self: flex-end;
+    cursor: pointer;
+    padding: 1rem;
+}
+.Player__Iframe--Closed {
+    display: none;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0.34;
+    }
+    to {
+        opacity: 1;
+    }
+}

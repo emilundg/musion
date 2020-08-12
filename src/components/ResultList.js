@@ -1,10 +1,21 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {forwardRef, useRef, useImperativeHandle, useState, useEffect} from 'react';
 import '../styles/ResultList.css';
 import {FaPlay, FaClock} from 'react-icons/fa';
 
-const ResultList = ({data}) => {
+const ResultList = forwardRef(({
+    emitPlaybackURL,
+    data
+}, ref) => {
     const [mergedSongs,
         setMergedSongs] = useState([]);
+    const [isLoading,
+        setIsLoading] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+        setLoading() {
+            setIsLoading(true);
+        }
+    }));
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -21,6 +32,7 @@ const ResultList = ({data}) => {
             })
             shuffleArray(tempArray);
             setMergedSongs(tempArray);
+            setIsLoading(false);
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }
         mergeArrays();
@@ -28,7 +40,12 @@ const ResultList = ({data}) => {
 
     const listItems = (song) => {
         return (
-            <tr key={song.key}>
+            <tr
+                onClick={() => emitPlaybackURL(song.url)}
+                key={song.key}
+                className={`ResultList__TableRow ${isLoading
+                ? 'FadeOut'
+                : 'FadeIn'}`}>
                 <td>
                     <img src={song.pictures.medium} alt="Song description"/>
                 </td>
@@ -51,19 +68,21 @@ const ResultList = ({data}) => {
     }
 
     return (
-        <table className="ResultList">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {mergedSongs.map(songObject => {
-                    return (listItems(songObject))
-                })}
-            </tbody>
-        </table>
+        <div>
+            <table className={`ResultList ${isLoading && 'ResultList__Loading'}`}>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {mergedSongs.map(songObject => {
+                        return (listItems(songObject))
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
-}
+})
 export default ResultList;
