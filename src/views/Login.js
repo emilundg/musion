@@ -30,7 +30,7 @@ const Login = ({parentCallback}) => {
                 <source src={videos} type="video/mp4"/>
             </video>
             <div className="Login__FormContainer">
-                <p className="Login__FormHeader">Login</p>
+                <p className="Login__FormHeader" data-cy="greeting">Login</p>
                 <form className="Login__Form" onSubmit={handleSubmit}>
                     <div className="Login__InputContainer">
                         <label className="Login__Label">Username</label>

@@ -1,10 +1,7 @@
 describe('Cypress', () => {
-    it('should be working', () => {
-        expect(true)
-            .to
-            .equal(true)
+    beforeEach(() => {
+        cy.login();
+        cy.visit('/');
     })
-    it('visits the app', () => {
-        cy.visit('/')
-    })
+    it('should be working', () => {})
 })
