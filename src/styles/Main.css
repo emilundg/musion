@@ -1,16 +1,42 @@
 @import url( 'https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
 .Main__Header {
     height: 34rem;
-    background-image: linear-gradient(141deg, rgb(64, 87, 79) 0%, rgb(25, 160, 175) 51%, rgb(19, 131, 173) 75%);
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(238, 156, 167), rgb(255, 221, 225)) repeat scroll 0% 0%;
     display: grid;
     grid-template-columns: auto auto;
     grid-column-gap: 1rem;
     justify-content: center;
     align-items: center;
 }
+.Main__Body {
+    background-color: black;
+    height: 13rem;
+    padding: 5rem 0;
+    color: white;
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Main__BodySub {
+    display: grid;
+    grid-template-columns: 13rem 13rem 13rem;
+    grid-column-gap: 8rem;
+}
+.Main__BodySubHeader {
+    font-size: 2rem;
+    padding: 2rem 0;
+}
+.Main__BodyCaptionHeader {
+    padding: 1rem 0;
+    font-size: 1.5rem;
+}
 .Main__HeaderTitle {
     font-family: 'Raleway', sans-serif;
-    font-size: 2.5rem;
+    padding: 1rem 0;
+    font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -24,7 +50,7 @@
     border-radius: 500px;
     padding: 19px 56px 21px;
     color: #FFF;
-    background-color: #1DB954;
+    background-color: #364f6b;
     transition-property: background-color, border-color, color, box-shadow, filter, -webkit-box-shadow, -webkit-filter;
     font-weight: 700;
     text-align: center;
@@ -39,7 +65,7 @@
 }
 .Main__Button:hover {
     cursor: pointer;
-    background-color: #1ED760;
+    background-color: #76899d;
 }
 .Main__HeaderSubTitle {
     font-family: 'Raleway', sans-serif;
