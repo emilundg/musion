@@ -20,6 +20,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
+    "cypress": "cypress open",
     "server": "node server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^4.12.1"
   }
 }
