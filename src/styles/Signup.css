@@ -45,6 +45,12 @@
     border-radius: 21px;
 }
 
+.Signup__ErrorMessage {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #ff0033; 
+}
+
 .Signup__Label {
     font-size: 0.875rem;
     margin-left: 0.5rem;
