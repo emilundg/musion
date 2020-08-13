@@ -9,19 +9,32 @@ function Signup() {
         setUsername] = useState("");
     const [password,
         setPassword] = useState("");
+    const [confirmPassword,
+        setConfirmPassword] = useState("");
+    const [errorMessage,
+        setErrorMessage] = useState("");
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        if (username && password) {
-            Axios
-                .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
-                .then((res) => {
-                    console.log(res)
-                })
-                .catch((error) => {
-                    console.log(error)
-                });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const validPassword = comparePasswords();
+        if (validPassword) {
+            if (username && password) {
+                Axios
+                    .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((error) => {
+                        const {msg} = error.response.data;
+                        setErrorMessage(msg);
+                    });
+            }
+        } else {
+            setErrorMessage("Passwords do not match");
         }
+    }
+    const comparePasswords = () => {
+        return confirmPassword === password;
     }
 
     return (
@@ -38,6 +51,11 @@ function Signup() {
                             type="text"
                             className="Signup__Input"
                             value={username}
+                            onFocus={() => {
+                            if (errorMessage) {
+                                setErrorMessage("")
+                            }
+                        }}
                             onChange={(e) => setUsername(e.target.value)}/>
                     </div>
                     <div className="Signup__InputContainer">
@@ -46,7 +64,28 @@ function Signup() {
                             type="password"
                             className="Signup__Input"
                             value={password}
+                            onFocus={() => {
+                            if (errorMessage) {
+                                setErrorMessage("")
+                            }
+                        }}
                             onChange={(e) => setPassword(e.target.value)}/>
+                    </div>
+                    <div className="Signup__InputContainer">
+                        <label className="Signup__Label">Repeat password</label>
+                        <input
+                            type="password"
+                            className="Signup__Input"
+                            value={confirmPassword}
+                            onFocus={() => {
+                            if (errorMessage) {
+                                setErrorMessage("")
+                            }
+                        }}
+                            onChange={(e) => setConfirmPassword(e.target.value)}/>
+                    </div>
+                    <div className="Signup__ErrorMessage">
+                        {errorMessage}
                     </div>
                     <input type="submit" className="Signup__Button" value="Signup"></input>
                 </form>

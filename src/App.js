@@ -18,28 +18,23 @@ function App() {
     return (
         <Router>
             <div>
+                <div className="App__Logo">
+                    MUSION
+                </div>
                 <ul className="App__Navbar">
                     <li>
                         <Link to="/">Home</Link>
                     </li>
                     {!loggedIn
-                        ? <>
-                                <li>
-                                    <Link to="/login">Login</Link>
-                                </li>
-                                <li>
-                                    <Link to="/signup">Signup</Link>
-                                </li>
-                            </>
+                        ? <> <li>
+                            <Link to="/login">Login</Link>
+                        </li> < li > <Link to="/signup">Signup</Link> < /li>
+                            </ >
                         : <li>
                             <Link to="/" onClick={() => setLoggedIn(false)}>Logout</Link>
                         </li>
 }
                 </ul>
-
-                <div className="App__Logo">
-                   MUSION 
-                </div>
 
                 <Switch>
                     <Route path="/login">
