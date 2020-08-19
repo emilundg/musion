@@ -21,7 +21,7 @@
   },
   "scripts": {
     "cypress": "cypress open",
-    "server": "node server.js",
+    "server": "node ./server/server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
