@@ -1,5 +1,6 @@
 describe('Cypress', () => {
     beforeEach(() => {
-        cy.task('clear:db');
+        cy.task('clearDB');
     })
+    it('start a test', () => {})
 })

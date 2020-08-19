@@ -7,7 +7,7 @@ const db = require('./db');
 db.then((dbInstance) => {
     const usersCollection = dbInstance.collection('users');
     app.locals.users = usersCollection;
-})
+});
 
 app.use(express.json());
 app.use(cors());
