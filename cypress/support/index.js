@@ -4,7 +4,12 @@ Cypress
     .Commands
     .add('login', () => {
         cy
-            .request('POST', 'http://localhost:5000/api/users/login?username=jane&password=doe')
+            .request('POST', '/api/users/login?username=jane&password=doe')
             .its('body')
-            .as('currentUser');
+            .as('currentUser')
+            .then((resp) => {
+                window
+                    .localStorage
+                    .setItem('user', true)
+            });
     })

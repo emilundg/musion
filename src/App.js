@@ -7,13 +7,16 @@ import Signup from './views/Signup';
 import Dashboard from './views/Dashboard';
 
 function App() {
-    const [loggedIn,
-        setLoggedIn] = useState(false);
-
+    const isLoggedIn = () => {
+        return localStorage.getItem('user') != null;
+    };
     const loginCallback = (loginStatus) => {
         if (loginStatus === 202) {
-            setLoggedIn(true);
+            localStorage.setItem("user", true);
         }
+    }
+    const logOut = () => {
+        localStorage.removeItem("user");
     }
     return (
         <Router>
@@ -25,20 +28,20 @@ function App() {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    {!loggedIn
+                    {!isLoggedIn()
                         ? <> <li>
                             <Link to="/login">Login</Link>
                         </li> < li > <Link to="/signup">Signup</Link> < /li>
                             </ >
                         : <li>
-                            <Link to="/" onClick={() => setLoggedIn(false)}>Logout</Link>
+                            <Link to="/" onClick={() => logOut()}>Logout</Link>
                         </li>
 }
                 </ul>
 
                 <Switch>
                     <Route path="/login">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Redirect to="/dashboard"/>
                             : <Login parentCallback={loginCallback}/>
 }
@@ -47,13 +50,13 @@ function App() {
                         <Signup/>
                     </Route>
                     <Route path="/dashboard">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Dashboard/>
                             : <Redirect to="/login"/>
 }
                     </Route>
                     <Route exact path="/">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Redirect to="/dashboard"/>
                             : <Main/>}
                     </Route>
