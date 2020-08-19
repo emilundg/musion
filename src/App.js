@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import './App.css';
 import Main from './views/Main';
@@ -40,13 +40,17 @@ function App() {
                     <Route path="/login">
                         {loggedIn
                             ? <Redirect to="/dashboard"/>
-                            : <Login parentCallback={loginCallback}/>}
+                            : <Login parentCallback={loginCallback}/>
+}
                     </Route>
                     <Route path="/signup">
                         <Signup/>
                     </Route>
                     <Route path="/dashboard">
-                        <Dashboard/>
+                        {loggedIn
+                            ? <Dashboard/>
+                            : <Redirect to="/login"/>
+}
                     </Route>
                     <Route exact path="/">
                         {loggedIn
