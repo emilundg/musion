@@ -10,6 +10,6 @@ Cypress
             .then((resp) => {
                 window
                     .localStorage
-                    .setItem('user', true)
+                    .setItem('token', resp.token)
             });
     })

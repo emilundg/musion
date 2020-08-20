@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import './App.css';
 import Main from './views/Main';
@@ -30,15 +30,15 @@ function App() {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    {!loggedIn && <li>
+                    {!isLoggedIn() && <li>
                         <Link to="/login">Login</Link>
                     </li>}
 
-                    {!loggedIn && <li>
+                    {!isLoggedIn() && <li>
                         <Link to="/signup">Signup</Link>
                     </li>}
 
-                    {loggedIn && <li>
+                    {isLoggedIn() && <li>
                         <Link to="/" onClick={() => logOut()}>Logout</Link>
                     </li>
 }
@@ -46,7 +46,7 @@ function App() {
 
                 <Switch>
                     <Route path="/login">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Redirect to="/dashboard"/>
                             : <Login parentCallback={loginCallback}/>
 }
@@ -55,13 +55,13 @@ function App() {
                         <Signup/>
                     </Route>
                     <Route path="/dashboard">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Dashboard/>
                             : <Redirect to="/login"/>
 }
                     </Route>
                     <Route exact path="/">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Redirect to="/dashboard"/>
                             : <Main/>}
                     </Route>
