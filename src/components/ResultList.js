@@ -38,9 +38,10 @@ const ResultList = forwardRef(({
         mergeArrays();
     }, [data]);
 
-    const listItems = (song) => {
+    const listItems = (song, index) => {
         return (
             <tr
+                data-cy={`song-row-${index}`}
                 onClick={() => emitPlaybackURL(song.url)}
                 key={song.key}
                 className={`ResultList__TableRow ${isLoading
@@ -69,7 +70,7 @@ const ResultList = forwardRef(({
 
     return (
         <div>
-            <table className={`ResultList ${isLoading && 'ResultList__Loading'}`} data-cy="datatable">
+            <table className={`ResultList ${isLoading && 'ResultList__Loading'}`}>
                 <thead>
                     <tr>
                         <th></th>
@@ -77,8 +78,8 @@ const ResultList = forwardRef(({
                     </tr>
                 </thead>
                 <tbody>
-                    {mergedSongs.map(songObject => {
-                        return (listItems(songObject))
+                    {mergedSongs.map((songObject, index) => {
+                        return (listItems(songObject, index))
                     })}
                 </tbody>
             </table>

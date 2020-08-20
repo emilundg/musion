@@ -15,18 +15,21 @@ const Player = forwardRef(({
             }
         }
         changePlayerState();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [playbackURL]);
     if (playbackURL) {
         return (
-            <div className="Player">
+            <div className="Player" data-cy="player">
                 <div className="Player__Accordion">
                     {playerOpen
                         ? <FaChevronUp onClick={() => setPlayerOpen(false)}/>
                         : <FaChevronDown onClick={() => setPlayerOpen(true)}/>}
                 </div>
                 <iframe
-                    className={!playerOpen ? 'Player__Iframe--Closed' : undefined}
+                    data-cy="player-iframe"
+                    className={!playerOpen
+                    ? 'Player__Iframe--Closed'
+                    : undefined}
                     title="Song playback"
                     width="100%"
                     height="89%"
