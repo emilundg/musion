@@ -7,16 +7,18 @@ import Signup from './views/Signup';
 import Dashboard from './views/Dashboard';
 
 function App() {
+    const [loggedIn,
+        setLoggedIn] = useState(false);
     const isLoggedIn = () => {
-        return localStorage.getItem('user') != null;
+        return localStorage.getItem('token') != null;
     };
-    const loginCallback = (loginStatus) => {
-        if (loginStatus === 202) {
-            localStorage.setItem("user", true);
-        }
+    const loginCallback = (token) => {
+        localStorage.setItem("token", token);
+        setLoggedIn(true);
     }
     const logOut = () => {
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        setLoggedIn(false);
     }
     return (
         <Router>
@@ -28,20 +30,23 @@ function App() {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    {!isLoggedIn()
-                        ? <> <li>
-                            <Link to="/login">Login</Link>
-                        </li> < li > <Link to="/signup">Signup</Link> < /li>
-                            </ >
-                        : <li>
-                            <Link to="/" onClick={() => logOut()}>Logout</Link>
-                        </li>
+                    {!loggedIn && <li>
+                        <Link to="/login">Login</Link>
+                    </li>}
+
+                    {!loggedIn && <li>
+                        <Link to="/signup">Signup</Link>
+                    </li>}
+
+                    {loggedIn && <li>
+                        <Link to="/" onClick={() => logOut()}>Logout</Link>
+                    </li>
 }
                 </ul>
 
                 <Switch>
                     <Route path="/login">
-                        {isLoggedIn()
+                        {loggedIn
                             ? <Redirect to="/dashboard"/>
                             : <Login parentCallback={loginCallback}/>
 }
@@ -50,13 +55,13 @@ function App() {
                         <Signup/>
                     </Route>
                     <Route path="/dashboard">
-                        {isLoggedIn()
+                        {loggedIn
                             ? <Dashboard/>
                             : <Redirect to="/login"/>
 }
                     </Route>
                     <Route exact path="/">
-                        {isLoggedIn()
+                        {loggedIn
                             ? <Redirect to="/dashboard"/>
                             : <Main/>}
                     </Route>

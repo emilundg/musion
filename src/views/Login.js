@@ -16,8 +16,8 @@ const Login = ({parentCallback}) => {
             Axios
                 .post(`http://localhost:5000/api/users/Login?username=${username}&password=${password}`)
                 .then((res) => {
-                    console.log(res)
-                    parentCallback(res.status);
+                    const {token} = res.data;
+                    parentCallback(token);
                 })
                 .catch((error) => {
                     console.log(error)
