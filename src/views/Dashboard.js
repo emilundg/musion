@@ -78,7 +78,7 @@ function Dashboard() {
                     backgroundColor: element.bgColor
                 }}>
                     {element.searchParam}
-                    <button onClick={() => RemoveQuery(element)} className="Dashboard__CloseButton">
+                    <button onClick={() => RemoveQuery(element)} className="Dashboard__CloseButton" data-cy={`search-query-${index}`}>
                         <FaTimes/>
                     </button>
                 </div>
@@ -95,10 +95,14 @@ function Dashboard() {
                     <input
                         type="text"
                         className="Dashboard__SearchInput"
+                        data-cy="search-input"
                         value={searchParam}
                         placeholder="Search"
                         onChange={(e) => setSearchParam(e.target.value)}/>
-                    <button onClick={(e) => AddQuery(e)} className="Dashboard__SearchButton">Add</button>
+                    <button
+                        onClick={(e) => AddQuery(e)}
+                        className="Dashboard__SearchButton"
+                        data-cy="add-button">Add</button>
                 </div>
                 <div className="Dashboard__TagsContainer">
                     {RenderTags()}

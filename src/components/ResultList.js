@@ -69,7 +69,7 @@ const ResultList = forwardRef(({
 
     return (
         <div>
-            <table className={`ResultList ${isLoading && 'ResultList__Loading'}`}>
+            <table className={`ResultList ${isLoading && 'ResultList__Loading'}`} data-cy="datatable">
                 <thead>
                     <tr>
                         <th></th>

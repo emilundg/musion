@@ -13,3 +13,15 @@ Cypress
                     .setItem('token', resp.token)
             });
     })
+
+Cypress
+    .Commands
+    .add('addQuery', (searchParam) => {
+        cy
+            .get('[data-cy=search-input]')
+            .type(searchParam);
+        cy
+            .get('[data-cy=add-button]')
+            .click();
+        cy.wait('@getSongs');
+    })
