@@ -21,15 +21,28 @@ router.post('/signup', (req, res) => {
                         .insertOne({
                             username,
                             password: hash
-                        }, function (err) {
+                        }, function (err, doc) {
                             if (err) 
                                 throw err;
-                            res.json({username});
+                            const token = jwt.sign({
+                                id: doc
+                            }, config.JWT_SECRET, {expiresIn: 3600});
+                            if (!token) 
+                                throw Error('Couldnt sign the token');
+                            res
+                                .status(200)
+                                .json({
+                                    token,
+                                    user: {
+                                        id: doc,
+                                        name: username
+                                    }
+                                });
                         });
-                })
-            })
-        })
-})
+                });
+            });
+        });
+});
 
 router.post('/login', (req, res) => {
     const {users} = req.app.locals;

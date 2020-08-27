@@ -3,8 +3,7 @@ import '../styles/Signup.css';
 import videos from '../assets/coverr-someone-is-connecting-cables-5103.mp4';
 import Axios from "axios";
 
-function Signup() {
-    // Declare a new state variable, which we'll call "count"
+function Signup({parentCallback}) {
     const [username,
         setUsername] = useState("");
     const [password,
@@ -16,27 +15,30 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!username) {
+            return setErrorMessage('username can not be blank');
+        } else if (!password) {
+            return setErrorMessage('password can not be blank');
+        }
         const validPassword = comparePasswords();
-        if (validPassword) {
-            if (username && password) {
-                Axios
-                    .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
-                    .then((res) => {
-                        console.log(res);
-                    })
-                    .catch((error) => {
-                        const {msg} = error.response.data;
-                        setErrorMessage(msg);
-                    });
-            }
+        if (username && validPassword) {
+            Axios
+                .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
+                .then((res) => {
+                    const {token} = res.data;
+                    parentCallback(token);
+                })
+                .catch((error) => {
+                    const {msg} = error.response.data;
+                    setErrorMessage(msg);
+                });
         } else {
             setErrorMessage("Passwords do not match");
         }
-    }
+    };
     const comparePasswords = () => {
         return confirmPassword === password;
-    }
-
+    };
     return (
         <div className="Signup">
             <video className="Signup__Video" loop autoPlay>
@@ -50,6 +52,7 @@ function Signup() {
                         <input
                             type="text"
                             className="Signup__Input"
+                            data-cy="username"
                             value={username}
                             onFocus={() => {
                             if (errorMessage) {
@@ -62,6 +65,7 @@ function Signup() {
                         <label className="Signup__Label">Password</label>
                         <input
                             type="password"
+                            data-cy="password"
                             className="Signup__Input"
                             value={password}
                             onFocus={() => {
@@ -75,6 +79,7 @@ function Signup() {
                         <label className="Signup__Label">Repeat password</label>
                         <input
                             type="password"
+                            data-cy="confirm-password"
                             className="Signup__Input"
                             value={confirmPassword}
                             onFocus={() => {
@@ -84,10 +89,14 @@ function Signup() {
                         }}
                             onChange={(e) => setConfirmPassword(e.target.value)}/>
                     </div>
-                    <div className="Signup__ErrorMessage">
+                    <div className="Signup__ErrorMessage" data-cy="error-message">
                         {errorMessage}
                     </div>
-                    <input type="submit" className="Signup__Button" value="Signup"></input>
+                    <input
+                        type="submit"
+                        className="Signup__Button"
+                        value="Signup"
+                        data-cy="signup-button"></input>
                 </form>
             </div>
         </div>

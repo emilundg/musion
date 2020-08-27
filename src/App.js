@@ -23,10 +23,10 @@ function App() {
     return (
         <Router>
             <div>
-                <div className="App__Logo">
+                <div className="App__Logo" data-cy="header-logo">
                     MUSION
                 </div>
-                <ul className="App__Navbar">
+                <ul className="App__Navbar" data-cy="header-navbar">
                     <li>
                         <Link to="/">Home</Link>
                     </li>
@@ -52,7 +52,10 @@ function App() {
 }
                     </Route>
                     <Route path="/signup">
-                        <Signup/>
+                        {isLoggedIn()
+                            ? <Redirect to="/dashboard"/>
+                            : <Signup parentCallback={loginCallback}/>
+}
                     </Route>
                     <Route path="/dashboard">
                         {isLoggedIn()

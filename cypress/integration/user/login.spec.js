@@ -23,7 +23,7 @@ describe('Login', () => {
     it('should require password', () => {
         cy
             .get('[data-cy=email]')
-            .type('jane{enter}');
+            .type('musion_test_user{enter}');
         cy
             .get('[data-cy=error-message]')
             .should('contain', 'password can not be blank');
@@ -31,10 +31,10 @@ describe('Login', () => {
     it('should navigate to /dashboard on succesful login', () => {
         cy
             .get('[data-cy=email]')
-            .type('jane{enter}');
+            .type('musion_test_user');
         cy
             .get('[data-cy=password]')
-            .type('doe{enter}');
+            .type('musion_test_user_password{enter}');
         cy
             .url()
             .should('include', '/dashboard');

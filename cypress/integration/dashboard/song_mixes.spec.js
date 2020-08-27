@@ -1,4 +1,4 @@
-describe('Cypress', () => {
+describe('Song mixes', () => {
     beforeEach(() => {
         cy.server();
         cy

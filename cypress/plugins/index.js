@@ -6,7 +6,7 @@ module.exports = (on, config) => {
             db.then((dbInstance) => {
                 dbInstance
                     .collection('users')
-                    .drop();
+                    .deleteOne({"username": "musion_test_user"});
             });
             return null;
         }
