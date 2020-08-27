@@ -3,8 +3,7 @@ import '../styles/Signup.css';
 import videos from '../assets/coverr-someone-is-connecting-cables-5103.mp4';
 import Axios from "axios";
 
-function Signup() {
-    // Declare a new state variable, which we'll call "count"
+function Signup({parentCallback}) {
     const [username,
         setUsername] = useState("");
     const [password,
@@ -16,27 +15,30 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!username) {
+            return setErrorMessage('username can not be blank');
+        } else if (!password) {
+            return setErrorMessage('password can not be blank');
+        }
         const validPassword = comparePasswords();
-        if (validPassword) {
-            if (username && password) {
-                Axios
-                    .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
-                    .then((res) => {
-                        console.log(res);
-                    })
-                    .catch((error) => {
-                        const {msg} = error.response.data;
-                        setErrorMessage(msg);
-                    });
-            }
+        if (username && validPassword) {
+            Axios
+                .post(`http://localhost:5000/api/users/signup?username=${username}&password=${password}`)
+                .then((res) => {
+                    const {token} = res.data;
+                    parentCallback(token);
+                })
+                .catch((error) => {
+                    const {msg} = error.response.data;
+                    setErrorMessage(msg);
+                });
         } else {
             setErrorMessage("Passwords do not match");
         }
-    }
+    };
     const comparePasswords = () => {
         return confirmPassword === password;
-    }
-
+    };
     return (
         <div className="Signup">
             <video className="Signup__Video" loop autoPlay>

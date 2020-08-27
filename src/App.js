@@ -9,11 +9,16 @@ import Dashboard from './views/Dashboard';
 function App() {
     const [loggedIn,
         setLoggedIn] = useState(false);
-
-    const loginCallback = (loginStatus) => {
-        if (loginStatus === 202) {
-            setLoggedIn(true);
-        }
+    const isLoggedIn = () => {
+        return localStorage.getItem('token') != null;
+    };
+    const loginCallback = (token) => {
+        localStorage.setItem("token", token);
+        setLoggedIn(true);
+    }
+    const logOut = () => {
+        localStorage.removeItem("token");
+        setLoggedIn(false);
     }
     return (
         <Router>
@@ -25,31 +30,41 @@ function App() {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    {!loggedIn
-                        ? <> <li>
-                            <Link to="/login">Login</Link>
-                        </li> < li > <Link to="/signup">Signup</Link> < /li>
-                            </ >
-                        : <li>
-                            <Link to="/" onClick={() => setLoggedIn(false)}>Logout</Link>
-                        </li>
+                    {!isLoggedIn() && <li>
+                        <Link to="/login">Login</Link>
+                    </li>}
+
+                    {!isLoggedIn() && <li>
+                        <Link to="/signup">Signup</Link>
+                    </li>}
+
+                    {isLoggedIn() && <li>
+                        <Link to="/" onClick={() => logOut()}>Logout</Link>
+                    </li>
 }
                 </ul>
 
                 <Switch>
                     <Route path="/login">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Redirect to="/dashboard"/>
-                            : <Login parentCallback={loginCallback}/>}
+                            : <Login parentCallback={loginCallback}/>
+}
                     </Route>
                     <Route path="/signup">
-                        <Signup/>
+                        {isLoggedIn()
+                            ? <Redirect to="/dashboard"/>
+                            : <Signup parentCallback={loginCallback}/>
+}
                     </Route>
                     <Route path="/dashboard">
-                        <Dashboard/>
+                        {isLoggedIn()
+                            ? <Dashboard/>
+                            : <Redirect to="/login"/>
+}
                     </Route>
                     <Route exact path="/">
-                        {loggedIn
+                        {isLoggedIn()
                             ? <Redirect to="/dashboard"/>
                             : <Main/>}
                     </Route>
