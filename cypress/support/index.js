@@ -4,7 +4,7 @@ Cypress
     .Commands
     .add('login', () => {
         cy
-            .request('POST', '/api/users/login?username=jane&password=doe')
+            .request('POST', '/api/users/login?username=musion_test_user&password=musion_test_user_password')
             .its('body')
             .as('currentUser')
             .then((resp) => {
