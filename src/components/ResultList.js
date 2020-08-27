@@ -41,7 +41,6 @@ const ResultList = forwardRef(({
     const listItems = (song, index) => {
         return (
             <tr
-                data-cy={`song-row-${index}`}
                 onClick={() => emitPlaybackURL(song.url)}
                 key={song.key}
                 className={`ResultList__TableRow ${isLoading

@@ -35,13 +35,12 @@ const Login = ({parentCallback}) => {
                 <source src={videos} type="video/mp4"/>
             </video>
             <div className="Login__FormContainer">
-                <p className="Login__FormHeader" data-cy="greeting">Sign In</p>
-                <a href="/register" data-cy="signup-link">Need an account?</a>
+                <p className="Login__FormHeader">Sign In</p>
+                <a href="/register">Need an account?</a>
                 <form className="Login__Form" onSubmit={handleSubmit}>
                     <div className="Login__InputContainer">
                         <label className="Login__Label">Username</label>
                         <input
-                            data-cy="email"
                             type="text"
                             className="Login__Input"
                             value={username}
@@ -50,20 +49,15 @@ const Login = ({parentCallback}) => {
                     <div className="Login__InputContainer">
                         <label className="Login__Label">Password</label>
                         <input
-                            data-cy="password"
                             type="password"
                             className="Login__Input"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}/>
                     </div>
-                    <div data-cy="error-message">
+                    <div>
                         {errorMessage}
                     </div>
-                    <input
-                        type="submit"
-                        className="Login__Button"
-                        value="Login"
-                        data-cy="login-button"></input>
+                    <input type="submit" className="Login__Button" value="Login"></input>
                 </form>
             </div>
         </div>

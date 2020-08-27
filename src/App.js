@@ -23,10 +23,10 @@ function App() {
     return (
         <Router>
             <div>
-                <div className="App__Logo" data-cy="header-logo">
+                <div className="App__Logo">
                     MUSION
                 </div>
-                <ul className="App__Navbar" data-cy="header-navbar">
+                <ul className="App__Navbar">
                     <li>
                         <Link to="/">Home</Link>
                     </li>

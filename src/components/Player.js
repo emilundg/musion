@@ -19,14 +19,13 @@ const Player = forwardRef(({
     }, [playbackURL]);
     if (playbackURL) {
         return (
-            <div className="Player" data-cy="player">
+            <div className="Player">
                 <div className="Player__Accordion">
                     {playerOpen
                         ? <FaChevronUp onClick={() => setPlayerOpen(false)}/>
                         : <FaChevronDown onClick={() => setPlayerOpen(true)}/>}
                 </div>
                 <iframe
-                    data-cy="player-iframe"
                     className={!playerOpen
                     ? 'Player__Iframe--Closed'
                     : undefined}

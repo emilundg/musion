@@ -52,7 +52,6 @@ function Signup({parentCallback}) {
                         <input
                             type="text"
                             className="Signup__Input"
-                            data-cy="username"
                             value={username}
                             onFocus={() => {
                             if (errorMessage) {
@@ -65,7 +64,6 @@ function Signup({parentCallback}) {
                         <label className="Signup__Label">Password</label>
                         <input
                             type="password"
-                            data-cy="password"
                             className="Signup__Input"
                             value={password}
                             onFocus={() => {
@@ -79,7 +77,6 @@ function Signup({parentCallback}) {
                         <label className="Signup__Label">Repeat password</label>
                         <input
                             type="password"
-                            data-cy="confirm-password"
                             className="Signup__Input"
                             value={confirmPassword}
                             onFocus={() => {
@@ -89,14 +86,10 @@ function Signup({parentCallback}) {
                         }}
                             onChange={(e) => setConfirmPassword(e.target.value)}/>
                     </div>
-                    <div className="Signup__ErrorMessage" data-cy="error-message">
+                    <div className="Signup__ErrorMessage">
                         {errorMessage}
                     </div>
-                    <input
-                        type="submit"
-                        className="Signup__Button"
-                        value="Signup"
-                        data-cy="signup-button"></input>
+                    <input type="submit" className="Signup__Button" value="Signup"></input>
                 </form>
             </div>
         </div>
