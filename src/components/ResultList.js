@@ -38,7 +38,7 @@ const ResultList = forwardRef(({
         mergeArrays();
     }, [data]);
 
-    const listItems = (song) => {
+    const listItems = (song, index) => {
         return (
             <tr
                 onClick={() => emitPlaybackURL(song.url)}
@@ -77,8 +77,8 @@ const ResultList = forwardRef(({
                     </tr>
                 </thead>
                 <tbody>
-                    {mergedSongs.map(songObject => {
-                        return (listItems(songObject))
+                    {mergedSongs.map((songObject, index) => {
+                        return (listItems(songObject, index))
                     })}
                 </tbody>
             </table>
