@@ -7,7 +7,6 @@ describe('Header', () => {
 
 
 
-
     it('should contain home login and signup for not authenticated users', () => {
         cy
             .get('[data-cy=header-logo]')
@@ -42,5 +41,5 @@ describe('Header', () => {
     });
 
 
-    
+
 })

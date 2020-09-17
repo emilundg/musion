@@ -28,7 +28,7 @@ describe('Song mixes', () => {
     });
 
 
-    
+
     it('should start playing a song', () => {
         cy.addQuery('avicii');
         cy
