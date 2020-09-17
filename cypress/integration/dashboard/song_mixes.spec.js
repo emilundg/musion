@@ -7,6 +7,9 @@ describe('Song mixes', () => {
         cy.login();
         cy.visit('/dashboard');
     });
+
+
+
     it('should add and remove multiple search queries', () => {
         cy
             .get('[data-cy=search-input]')
@@ -22,8 +25,10 @@ describe('Song mixes', () => {
         cy
             .get('[data-cy=search-query-0]')
             .click();
-
     });
+
+
+    
     it('should start playing a song', () => {
         cy.addQuery('avicii');
         cy

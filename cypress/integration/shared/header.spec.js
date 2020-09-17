@@ -4,6 +4,10 @@ describe('Header', () => {
     beforeEach(() => {
         cy.visit('/');
     });
+
+
+
+
     it('should contain home login and signup for not authenticated users', () => {
         cy
             .get('[data-cy=header-logo]')
@@ -17,6 +21,10 @@ describe('Header', () => {
                     .should('contain.text', signedOutLinks[index]);
             });
     });
+
+
+
+
     it('should contain home and signout for authenticated users', () => {
         cy.login();
         cy.visit('/dashboard');
@@ -32,4 +40,7 @@ describe('Header', () => {
                     .should('contain.text', signedInLinks[index]);
             });
     });
+
+
+    
 })
